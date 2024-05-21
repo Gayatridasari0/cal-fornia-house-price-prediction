@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         viewModel.apiResponse.observe(this) {
             viewModel.isProgress.set(false)
             viewModel.result.set((it?.houseValue?:0.0)*100)
-            Toast.makeText(this, it?.houseValue.toString()?:"0", Toast.LENGTH_SHORT).show()
+             Toast.makeText(this, it?.houseValue.toString()?:"0", Toast.LENGTH_SHORT).show()
         }
 
     }
