@@ -17,17 +17,15 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(_binding.root)
         _binding.vm=viewModel
+        _binding.lifecycleOwner = this
         _binding.btnPredict.setOnClickListener {
-            //parse data to viewmodel
-
             viewModel.isProgress.set(true)
-            viewModel.fetchDataFromApi(_binding.etMedInc.text,_binding.etHouseAge.text,_binding.etAvgRooms.text,
-                _binding.etAvgBedrms.text,_binding.etPopulation,_binding.etAveOccup,_binding.etLatitude,_binding.etLongitude)
+            viewModel.fetchDataFromApi()
         }
         viewModel.apiResponse.observe(this) {
             viewModel.isProgress.set(false)
             viewModel.result.set((it?.houseValue?:0.0)*100)
-             Toast.makeText(this, it?.houseValue.toString()?:"0", Toast.LENGTH_SHORT).show()
+//             Toast.makeText(this, it?.houseValue.toString()?:"0", Toast.LENGTH_SHORT).show()
         }
 
     }
